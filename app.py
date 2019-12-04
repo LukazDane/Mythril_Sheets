@@ -5,9 +5,21 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def items_index():
+def home():
     """Display home page"""
     return render_template("home.html")
+
+
+@app.route('/library')
+def library():
+    """Display's all dnd info, according to homebrew, like a wiki"""
+    return render_template("library.html")
+
+
+@app.route('/sheets')
+def sheets():
+    """Displays Character sheets"""
+    return render_template("sheets.html")
 
 
 if __name__ == '__main__':

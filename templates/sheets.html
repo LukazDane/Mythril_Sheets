@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="main">
+    <div class="jumbotron">
+        <h1>Current Character Sheets</h1>
+    </div>
+    {% for sheet in sheets %}
+    <div class="container">
+        {% include 'partials/character_block.html' %}
+    </div>
+    {% else %}
+    <div class="container">
+        <p>No characters to display</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
