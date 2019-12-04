@@ -2,3 +2,46 @@
   text-align: center;
   margin: auto;
 }
+
+.carousel-item {
+  height: 80vh !important;
+}
+
+.character-card {
+  border: 1px solid black;
+  margin-block-end: 1em;
+}
+
+.character-img {
+  background-image: url("/static/assets/mf.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-right: 1px solid black;
+}
+
+.stat-block {
+  text-align: left;
+}
+
+#ci1 {
+  background-image: url("/static/assets/maxresdefault.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#ci2 {
+  background-image: url("/static/assets/maxresdefault\ \(1\).jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+#ci3 {
+  background-image: url("/static/assets/volo_guide_monster.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.clear {
+  opacity: 0;
+}
