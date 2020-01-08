@@ -1,3 +1,4 @@
 {
-    "python.pythonPath": "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/venv/bin/python3"
+    "python.pythonPath": "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/venv/bin/python3",
+    "python.formatting.provider": "autopep8"
 }
