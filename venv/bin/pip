@@ -1,4 +1,4 @@
-#!/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/venv/bin/python3
+#!/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/venv/bin/python2.7
 # -*- coding: utf-8 -*-
 import re
 import sys
