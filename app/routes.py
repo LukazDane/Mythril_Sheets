@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 from app.models import User, Sheet
 from werkzeug.urls import url_parse
 
@@ -81,7 +81,7 @@ def library():
 @login_required
 def pages():
     """Displays Character sheets"""
-   
+
     sheets = [
         {'author': user, 'body': 'Test post #1'},
         {'author': user, 'body': 'Test post #2'}
