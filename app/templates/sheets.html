@@ -1,49 +1,13 @@
 {% extends 'base.html' %}
 {% block body %}
-<div class="main">
-    <div class="jumbotron">
-        <h1>Current Character Sheets</h1>
-    </div>
-    <div class="container">
-        <div class="row character-card">
-            <div class="col-2 character-img"></div>
-            <div class="col-4 stat-block">
-                <p>Name: </p>
-                <p>Race: </p>
-                <p>Class: </p>
-            </div>
-            <div class="col-4 stat-block">
-                <p>Lvl: </p>
-                <p class="text-muted">-</p>
-                <p>Sub-Class: </p>
-            </div>
-        </div>
-        <div class="row character-card">
-            <div class="col-2 character-img"></div>
-            <div class="col-4 stat-block">
-                <p>Name: </p>
-                <p>Race: </p>
-                <p>Class: </p>
-            </div>
-            <div class="col-4 stat-block">
-                <p>Lvl: </p>
-                <p class="text-muted">-</p>
-                <p>Sub-Class: </p>
-            </div>
-        </div>
-        <div class="row character-card">
-            <div class="col-2 character-img"></div>
-            <div class="col-4 stat-block">
-                <p>Name: </p>
-                <p>Race: </p>
-                <p>Class: </p>
-            </div>
-            <div class="col-4 stat-block">
-                <p>Lvl: </p>
-                <p class="text-muted">-</p>
-                <p>Sub-Class: </p>
-            </div>
-        </div>
-    </div>
-</div>
+
+{% if sheets %}
+    {% for sheet in sheets %}
+        {% include 'partials/character_block.html' %}
+    {% endfor %}
+{% else %}
+    <h1> No character sheets!</h1>
+{% endif %}
+
+
 {% endblock %}

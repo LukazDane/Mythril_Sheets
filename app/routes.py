@@ -1,6 +1,10 @@
-from flask import render_template, flash, redirect, url_for
-from app import app
-from app.forms import LoginForm
+from flask import render_template, flash, redirect, url_for, request
+from app import app, db
+from app.forms import LoginForm, RegistrationForm
+from flask_login import current_user, login_user, login_required
+from app.models import User, Sheet
+from werkzeug.urls import url_parse
+
 
 #############################################
 # Login
@@ -18,13 +22,13 @@ def login():
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = url_for('home')
         return redirect(next_page)
         # return redirect(url_for('home'))
     return render_template('login.html', title='Sign In', form=form)
 
 #############################################
-# Log0ut 
+# Log0ut
 #############################################
 @app.route('/logout')
 def logout():
@@ -32,7 +36,7 @@ def logout():
     return redirect(url_for('home'))
 
 #############################################
-# Register 
+# Register
 #############################################
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -48,20 +52,23 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+
 @app.route('/')
+@app.route('/home')
 def home():
     """Display home page"""
     return render_template("home.html")
+
 
 @app.route('/user/<username>')
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
+    sheets = [
         {'author': user, 'body': 'Test post #1'},
         {'author': user, 'body': 'Test post #2'}
     ]
-    return render_template('user.html', user=user, posts=posts)
+    return render_template('user.html', user=user, sheets=sheets)
 
 
 @app.route('/library')
@@ -70,8 +77,13 @@ def library():
     return render_template("library.html")
 
 
-@app.route('/sheets')
+@app.route('/pages')
 @login_required
-def sheets():
+def pages():
     """Displays Character sheets"""
-    return render_template("sheets.html")
+   
+    sheets = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template("sheets.html", title='Sheets', sheets=sheets)
