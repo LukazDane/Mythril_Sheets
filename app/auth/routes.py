@@ -21,7 +21,7 @@ def login():
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
         login_user(user, remember=form.remember_me.data)
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
@@ -52,7 +52,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash('Congratulations, you are now a registered user!')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     return render_template('auth/register.html', title='Register', form=form)
 
 #############################################
@@ -68,7 +68,7 @@ def reset_password_request():
         if user:
             send_password_reset_email(user)
         flash('Check your email for the instructions to reset your password')
-        return redirect(url_for('login'))
+        return redirect(url_for('auth.login'))
     return render_template('auth/reset_password_request.html',
                            title='Reset Password', form=form)
 
