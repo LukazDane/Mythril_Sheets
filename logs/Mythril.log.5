@@ -1,4 +1,4 @@
-2020-01-09 20:48:31,615 ERROR: Exception on /explore [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
+2020-01-09 20:44:46,722 ERROR: Exception on /pages [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
 Traceback (most recent call last):
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -14,8 +14,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/routes.py", line 157, in explore
-    return render_template('sheets.html', title='Explore', sheets=sheets)
+  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/routes.py", line 94, in pages
+    return render_template("sheets.html", title='Sheets', sheets=sheets)
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/templating.py", line 138, in render_template
     ctx.app.jinja_env.get_or_select_template(template_name_or_list),
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/environment.py", line 869, in get_or_select_template
@@ -32,15 +32,40 @@ Traceback (most recent call last):
     reraise(exc_type, exc_value, tb)
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/_compat.py", line 37, in reraise
     raise value.with_traceback(tb)
-  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/sheets.html", line 24, in <module>
-    {% endblock % }
+  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/sheets.html", line 9, in <module>
+    {% for field in form if field.name != "csrf_token" % }
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/environment.py", line 497, in _parse
     return Parser(self, source, name, encode_filename(filename)).parse()
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 901, in parse
     result = nodes.Template(self.subparse(), lineno=1)
-  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 888, in subparse
-    self.stream.expect('block_end')
-  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/lexer.py", line 381, in expect
-    raise TemplateSyntaxError("expected token %r, got %r" %
-jinja2.exceptions.TemplateSyntaxError: expected token 'end of statement block', got '%'
-2020-01-09 21:18:47,752 INFO: Mythril startup [in /Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/__init__.py:48]
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 883, in subparse
+    rv = self.parse_statement()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 130, in parse_statement
+    return getattr(self, 'parse_' + self.stream.current.value)()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 197, in parse_for
+    test = self.parse_expression()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 432, in parse_expression
+    return self.parse_condexpr()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 437, in parse_condexpr
+    expr1 = self.parse_or()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 450, in parse_or
+    left = self.parse_and()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 459, in parse_and
+    left = self.parse_not()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 470, in parse_not
+    return self.parse_compare()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 480, in parse_compare
+    ops.append(nodes.Operand(token_type, self.parse_math1()))
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 496, in parse_math1
+    left = self.parse_concat()
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 507, in parse_concat
+    args = [self.parse_math2()]
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/parser.py", line 520, in parse_math2
+    next(self.stream)
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/lexer.py", line 359, in __next__
+    self.current = next(self._iter)
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/lexer.py", line 562, in wrap
+    for lineno, token, value in stream:
+  File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/lexer.py", line 681, in tokeniter
+    raise TemplateSyntaxError('unexpected \'%s\'' %
+jinja2.exceptions.TemplateSyntaxError: unexpected '}'

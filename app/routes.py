@@ -1,6 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, SheetForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.email import send_password_reset_email
 from flask_login import current_user, login_user, login_required, logout_user
 from app.models import User, Sheet
 from werkzeug.urls import url_parse
@@ -53,6 +54,41 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
 
+#############################################
+# Password Reset Request
+#############################################
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    form = ResetPasswordRequestForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user:
+            send_password_reset_email(user)
+        flash('Check your email for the instructions to reset your password')
+        return redirect(url_for('login'))
+    return render_template('reset_password_request.html',
+                           title='Reset Password', form=form)
+
+#############################################
+# Password Reset Route
+#############################################
+@app.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('home'))
+    user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('home'))
+    form = ResetPasswordForm()
+    if form.validate_on_submit():
+        user.set_password(form.password.data)
+        db.session.commit()
+        flash('Your password has been reset.')
+        return redirect(url_for('login'))
+    return render_template('reset_password.html', form=form)
+
 
 @app.route('/')
 @app.route('/home')
@@ -65,11 +101,15 @@ def home():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    sheets = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html', user=user, sheets=sheets)
+    page = request.args.get('page', 1, type=int)
+    sheets = user.sheets.order_by(Sheet.timestamp.desc()).paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('user', username=user.username, page=sheets.next_num) \
+        if sheets.has_next else None
+    prev_url = url_for('user', username=user.username, page=sheets.prev_num) \
+        if sheets.has_prev else None
+    return render_template('user.html', user=user, sheets=sheets.items,
+                           next_url=next_url, prev_url=prev_url)
 
 
 @app.route('/library')
@@ -78,16 +118,31 @@ def library():
     return render_template("library.html")
 
 
-@app.route('/pages')
+@app.route('/pages', methods=['GET', 'POST'])
 @login_required
 def pages():
     """Displays Character sheets"""
 
-    sheets = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
+    form = SheetForm()
+    if form.validate_on_submit():
+        sheet = Sheet(
+            body=form.body.data, author=current_user, character_name=form.character_name.data, level=form.level.data, race=form.race.data)
+        db.session.add(sheet)
+        db.session.commit()
+        flash('Your Character lives!')
+        return redirect(url_for('pages'))
+    sheets = current_user.followed_sheets().all()
     return render_template("sheets.html", title='Sheets', sheets=sheets)
+    page = request.args.get('page', 1, type=int)
+    sheets = current_user.followed_sheets().paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('sheets', page=sheets.next_num) \
+        if sheets.has_next else None
+    prev_url = url_for('sheets', page=sheets.prev_num) \
+        if sheets.has_prev else None
+    return render_template('sheets.html', title='Sheets', form=form,
+                           sheets=sheets.items, next_url=next_url,
+                           prev_url=prev_url)
 
 
 @app.before_request
@@ -112,3 +167,48 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',
                            form=form)
+
+
+@app.route('/follow/<username>')
+@login_required
+def follow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('home'))
+    if user == current_user:
+        flash('You cannot follow yourself!')
+        return redirect(url_for('user', username=username))
+    current_user.follow(user)
+    db.session.commit()
+    flash('You are following {}!'.format(username))
+    return redirect(url_for('user', username=username))
+
+
+@app.route('/unfollow/<username>')
+@login_required
+def unfollow(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('User {} not found.'.format(username))
+        return redirect(url_for('home'))
+    if user == current_user:
+        flash('You cannot unfollow yourself!')
+        return redirect(url_for('user', username=username))
+    current_user.unfollow(user)
+    db.session.commit()
+    flash('You are not following {}.'.format(username))
+    return redirect(url_for('user', username=username))
+
+
+@app.route('/explore')
+@login_required
+def explore():
+    page = request.args.get('page', 1, type=int)
+    sheets = Sheet.query.order_by(Sheet.timestamp.desc()).paginate(
+        page, app.config['POSTS_PER_PAGE'], False)
+    next_url = url_for('explore', page=sheets.next_num) \
+        if sheets.has_next else None
+    prev_url = url_for('explore', page=sheets.prev_num) \
+        if sheets.has_prev else None
+    return render_template('sheets.html', title='Explore', sheets=sheets.items, next_url=next_url, prev_url=prev_url)

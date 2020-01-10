@@ -1,6 +1,11 @@
 <table>
     <tr valign="top">
         <td><img src="{{ sheet.author.avatar(36) }}"></td>
-        <td>{{ sheet.author.username }} says:<br>{{ sheet.body }}</td>
+        <td>
+            <a href="{{ url_for('user', username=sheet.author.username) }}">
+                {{ sheet.author.username }}
+            </a>
+            created:<br>{{ sheet.character_name }}<br>{{ sheet.body}}
+        </td>
     </tr>
 </table>
