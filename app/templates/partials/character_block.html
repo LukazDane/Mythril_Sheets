@@ -12,8 +12,8 @@
         <p><strong>Description: </strong> {{ sheet.body }}</p>
     </div>
     <div>
-        {% if sheet.author.username == current_user.username %}
-        <p class="delete"><i class="far fa-trash-alt"></i></p>
+        {% if sheet.author.id == current_user.id %}
+        <p class="delete"><a href="{{ url_for('main.delete', id=sheet.id) }}"><i class="far fa-trash-alt"></i></a></p>
         {% else %}
         <p>Created by: <a
                 href="{{ url_for('main.user', username=sheet.author.username) }}">{{ sheet.author.username }}</a>

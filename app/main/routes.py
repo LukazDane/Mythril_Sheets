@@ -86,10 +86,20 @@ def edit_profile():
     return render_template('edit_profile.html', title='Edit Profile',
                            form=form)
 
-# @bp.route('/edit_sheet', methods=['GET', 'POST'])
-# @login_required
-# def edit_sheet():
-#     form = EditSheetForm()
+
+@bp.route('/delete', methods=['GET, ''POST', 'DELETE'])
+@login_required
+def delete(id):
+    sheet = Sheet.query.get(id)
+    if sheet is None:
+        flash('Charactr not found!')
+        return redirect(url_for('main.sheets',))
+    if sheet.author.id != g.user.id:
+        flash('You cannot delete this Character.')
+        return redirect(url_for('main.sheets'))
+    g.db.execute(id)
+    flash('Your post has been deleted.')
+    return redirect(url_for('main.sheets'))
 
 
 @bp.route('/follow/<username>')
