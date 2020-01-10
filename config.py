@@ -16,3 +16,4 @@ class Config(object):
     ADMINS = ['luke.harrison@students.makeschool.com']
     POSTS_PER_PAGE = 5
     LANGUAGES = ['en', 'es']
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
