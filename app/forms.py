@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
 from app.models import User
 
@@ -50,10 +50,25 @@ class SheetForm(FlaskForm):
     character_name = StringField('Character Name')
     level = IntegerField('Level', validators=[DataRequired()])
     race = StringField('Race/Species')
+    job = SelectField('Classes', choices=[('Barbarian', 'Barbarian'), ('Fighter', 'Fighter'), ('Paladin', 'Paladin'), ('Bard', 'Bard'), ('Sorcerer', 'Sorcerer'), (
+        'Warlock', 'Warlock'), ('Cleric', 'Cleric'), ('Druid', 'Druid'), ('Monk', 'Monk'), ('Ranger', 'Ranger'), ('Rogue', 'Rogue'), ('Wizard', 'Wizard')])
     body = TextAreaField('Character Description',
                          validators=[Length(min=0, max=250)])
-
     submit = SubmitField('Submit')
+
+
+class EditSheetForm(FlaskForm):
+    character_name = StringField('Character Name')
+    level = IntegerField('Level', validators=[DataRequired()])
+    race = StringField('Race/Species')
+    job = SelectField('Classes', choices=[('Barbarian', 'Barbarian'), ('Fighter', 'Fighter'), ('Paladin', 'Paladin'), ('Bard', 'Bard'), ('Sorcerer', 'Sorcerer'), (
+        'Warlock', 'Warlock'), ('Cleric', 'Cleric'), ('Druid', 'Druid'), ('Monk', 'Monk'), ('Ranger', 'Ranger'), ('Rogue', 'Rogue'), ('Wizard', 'Wizard')])
+    body = TextAreaField('Character Description',
+                         validators=[Length(min=0, max=250)])
+    submit = SubmitField('Submit')
+
+    def __init__(self, *args, **kwargs):
+            super(EditSheetForm, self).__init__(*args, **kwargs)
 
 
 class ResetPasswordRequestForm(FlaskForm):

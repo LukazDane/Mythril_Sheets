@@ -87,6 +87,7 @@ class Sheet(db.Model):
     character_name = db.Column(db.String(140))
     level = db.Column(db.Integer, default=0)
     race = db.Column(db.String(80))
+    job = db.Column(db.String(80))
     body = db.Column(db.String(140))
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

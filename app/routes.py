@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, SheetForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, SheetForm, ResetPasswordRequestForm, ResetPasswordForm, EditSheetForm
 from app.email import send_password_reset_email
 from flask_login import current_user, login_user, login_required, logout_user
 from app.models import User, Sheet
@@ -125,7 +125,7 @@ def pages():
     form = SheetForm()
     if form.validate_on_submit():
         sheet = Sheet(
-            body=form.body.data, author=current_user, character_name=form.character_name.data, level=form.level.data, race=form.race.data)
+            body=form.body.data, author=current_user, character_name=form.character_name.data, level=form.level.data, race=form.race.data, job=form.job.data)
         db.session.add(sheet)
         db.session.commit()
         flash('Your Character lives!')
@@ -166,6 +166,11 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile',
                            form=form)
+
+# @app.route('/edit_sheet', methods=['GET', 'POST'])
+# @login_required
+# def edit_sheet():
+#     form = EditSheetForm()
 
 
 @app.route('/follow/<username>')

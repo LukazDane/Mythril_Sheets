@@ -1,4 +1,4 @@
-2020-01-09 23:25:46,567 ERROR: Exception on /favicon.ico [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
+2020-01-09 23:26:21,927 ERROR: Exception on /favicon.ico [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
 Traceback (most recent call last):
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py", line 1949, in full_dispatch_request
     rv = self.dispatch_request()
@@ -47,9 +47,8 @@ Traceback (most recent call last):
   File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/partials/nav.html", line 29, in root
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/environment.py", line 430, in getattr
     return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'sheet' is undefined
-2020-01-09 23:25:56,415 INFO: Mythril startup [in /Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/__init__.py:53]
-2020-01-09 23:26:21,469 ERROR: Exception on /explore [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
+jinja2.exceptions.UndefinedError: 'user' is undefined
+2020-01-09 23:26:45,349 ERROR: Exception on /pages [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
 Traceback (most recent call last):
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -65,8 +64,8 @@ Traceback (most recent call last):
     return self.view_functions[rule.endpoint](**req.view_args)
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask_login/utils.py", line 261, in decorated_view
     return func(*args, **kwargs)
-  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/routes.py", line 213, in explore
-    return render_template('sheets.html', title='Explore', sheets=sheets.items, next_url=next_url, prev_url=prev_url)
+  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/routes.py", line 134, in pages
+    return render_template("sheets.html", title='Sheets', sheets=sheets, form=form)
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/templating.py", line 137, in render_template
     return _render(
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/templating.py", line 120, in _render

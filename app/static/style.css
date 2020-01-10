@@ -1,5 +1,20 @@
 body {
   background-color: #1e1e1e;
+  color: white;
+  min-height: 100vh;
+}
+.page-container {
+  position: relative;
+  min-height: 100vh;
+}
+.content-wrap {
+  padding-bottom: 2.5rem; /* Footer height */
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem; /* Footer height */
 }
 
 img.d-inline-block.align-top {
@@ -15,16 +30,103 @@ img.d-inline-block.align-top {
   height: 80vh !important;
 }
 
-.character-card {
-  border: 1px solid black;
-  margin-block-end: 1em;
+.myform {
+  border: 4px solid white;
+  border-radius: 20px;
+  width: 55vw;
+  text-align: center;
+}
+h1 {
+  text-align: center;
+}
+hr {
+  border: 0.5px solid rgba(255, 255, 255, 0.39);
 }
 
+div a {
+  color: white;
+  font-weight: 700;
+  font-size: 3vh;
+}
+.fas {
+  font-size: 4vh;
+  margin: 2px 3px;
+}
+.delete {
+  color: black;
+  position: absolute;
+  left: 95%;
+  bottom: 0;
+}
+#last_seen {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.btn-default {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+.character-card {
+  background-color: antiquewhite;
+  width: 90vw;
+  margin: 2vh auto;
+  height: 144px;
+  color: black;
+}
+
+.main_stats {
+  text-align: left;
+  padding: 0% 2%;
+  font-size: 2vw;
+  width: 25vw;
+}
+
+.description {
+  width: 40vw;
+  text-align: left;
+  margin: auto;
+}
+.foldtr {
+  position: relative;
+  -webkit-box-shadow: -5px 7px 5px rgba(0, 0, 0, 0.8);
+  -moz-box-shadow: -5px 7px 5px rgba(0, 0, 0, 0.8);
+  box-shadow: -5px 7px 5px rgba(0, 0, 0, 0.8);
+}
+
+.foldtr:before {
+  content: "";
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 0px;
+  height: 0px;
+  border-bottom: 70px solid #eee;
+  border-right: 70px solid transparent;
+  -webkit-box-shadow: -7px 7px 7px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: -7px 7px 7px rgba(0, 0, 0, 0.3);
+  box-shadow: -7px 7px 7px rgba(0, 0, 0, 0.3);
+}
+
+.foldtr:after {
+  content: "";
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  width: 0px;
+  height: 0px;
+  border-top: 69px solid #1e1e1e;
+  border-left: 69px solid transparent;
+}
 .character-img {
   background-image: url("/static/assets/mf.png");
   background-repeat: no-repeat;
   background-size: cover;
   border-right: 1px solid black;
+  width: 144px;
+  height: 144px;
 }
 
 .stat-block {

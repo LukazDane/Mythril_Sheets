@@ -2,13 +2,21 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 {% block body %}
-<h1>Hi, {{ current_user.username }}</h1>
 {% if form %}
-{{ wtf.quick_form(form) }}
+<h1>Draft a new characer</h1>
 <br>
-{% endif %}
-
+<div class=''>
+    <div class='container myform'>
+        {{ wtf.quick_form(form) }}
+        <br>
+        {% endif %}
+    </div>
+    <!-- <div class='container col'> This area for preview</div> -->
+</div>
+<br>
+<hr>
 {% if sheets %}
+<h1>Recently drafted characters...</h1>
 {% for sheet in sheets %}
 {% include 'partials/character_block.html' %}
 {% endfor %}

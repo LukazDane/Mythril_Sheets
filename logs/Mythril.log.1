@@ -1,4 +1,4 @@
-2020-01-09 23:26:45,591 ERROR: Exception on /favicon.ico [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
+2020-01-09 23:28:18,125 ERROR: Exception on /favicon.ico [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
 Traceback (most recent call last):
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py", line 1949, in full_dispatch_request
     rv = self.dispatch_request()
@@ -48,8 +48,9 @@ Traceback (most recent call last):
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/environment.py", line 430, in getattr
     return getattr(obj, attribute)
 jinja2.exceptions.UndefinedError: 'user' is undefined
-2020-01-09 23:28:15,314 INFO: Mythril startup [in /Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/__init__.py:53]
-2020-01-09 23:28:17,630 ERROR: Exception on /pages [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
+2020-01-09 23:31:13,146 INFO: Mythril startup [in /Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/__init__.py:53]
+2020-01-09 23:48:42,020 INFO: Mythril startup [in /Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/__init__.py:53]
+2020-01-09 23:48:51,740 ERROR: Exception on /pages [GET] [in /Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py:1890]
 Traceback (most recent call last):
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/flask/app.py", line 2446, in wsgi_app
     response = self.full_dispatch_request()
@@ -85,9 +86,11 @@ Traceback (most recent call last):
     return concat(self.root_render_func(self.new_context(vars)))
   File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/sheets.html", line 17, in root
     {% endif %}
-  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/base.html", line 12, in root
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/partials/nav.html", line 29, in root
+  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/base.html", line 15, in root
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/sheets.html", line 46, in block_body
+  File "/Users/lukazphelps/Desktop/SchoolCode/Mythril_Sheets/app/templates/partials/character_block.html", line 14, in root
+    </td>
   File "/Users/lukazphelps/.pyenv/versions/3.8.1/lib/python3.8/site-packages/jinja2/environment.py", line 430, in getattr
     return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'user' is undefined
+jinja2.exceptions.UndefinedError: 'post' is undefined
