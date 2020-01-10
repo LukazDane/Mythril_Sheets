@@ -122,7 +122,6 @@ def library():
 @login_required
 def pages():
     """Displays Character sheets"""
-
     form = SheetForm()
     if form.validate_on_submit():
         sheet = Sheet(
@@ -132,7 +131,7 @@ def pages():
         flash('Your Character lives!')
         return redirect(url_for('pages'))
     sheets = current_user.followed_sheets().all()
-    return render_template("sheets.html", title='Sheets', sheets=sheets)
+    return render_template("sheets.html", title='Sheets', sheets=sheets, form=form)
     page = request.args.get('page', 1, type=int)
     sheets = current_user.followed_sheets().paginate(
         page, app.config['POSTS_PER_PAGE'], False)

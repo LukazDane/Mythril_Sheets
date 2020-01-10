@@ -8,6 +8,8 @@ from logging.handlers import SMTPHandler
 from logging.handlers import RotatingFileHandler
 import os
 from flask_mail import Mail
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -17,6 +19,7 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
 mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 from app import models
 from app import routes

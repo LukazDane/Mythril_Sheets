@@ -1,25 +1,22 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
 {% block body %}
-
+<h1>Hi, {{ current_user.username }}</h1>
 {% if form %}
-<form action="" method="post">
-
-    {{form.csrf_token()}}
-
-    {% for field in form if field.name != "csrf_token" %}
-    <p> {{field.label()}} </p>
-    <p> {{field}}
-        {% for error in field.errors %}
-        {{error}}
-        {% endfor %}
-    </p>
-    {% endfor %}
-
-</form>
+{{ wtf.quick_form(form) }}
+<br>
 {% endif %}
+
+{% if sheets %}
 {% for sheet in sheets %}
 {% include 'partials/character_block.html' %}
 {% endfor %}
+{% else %}
+<h1>No Character Sheets to Display!</h1>
+{% endif %}
+
+
 {% if prev_url %}
 <a href="{{ prev_url }}">Newer Sheets</a>
 {% endif %}
