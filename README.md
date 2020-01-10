@@ -1,9 +1,14 @@
-### Mythril Sheets
+### Project Title: Mythril Sheets(Working Title)
 
 ##### Character, spell, and info Tracker for D&D(MakeDungeons)
 
 ---
+
 #### [Live](https://mythril-sheets.herokuapp.com/)
+
+---
+
+#### Utilizes Python-Flask and a Sql-Database
 
 #### To Run:
 
