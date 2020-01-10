@@ -1,11 +1,6 @@
-<div class="container">
-    <div class="row" style="border: 1px solid black">
-        <div class="col-2" style="border-right: 1px solid black"><img src="#" alt="character_placeholder"></div>
-        <div class="info col-8">
-            <p class="name">Character Name</p>
-            <p class="lvl">Lvl: 7</p>
-            <p class="race">Race: Orc</p>
-            <P>{{sheet.body}}</P>
-        </div>
-    </div>
-</div>
+<table>
+    <tr valign="top">
+        <td><img src="{{ sheet.author.avatar(36) }}"></td>
+        <td>{{ sheet.author.username }} says:<br>{{ sheet.body }}</td>
+    </tr>
+</table>
