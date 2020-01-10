@@ -17,5 +17,7 @@
         {% else %}
         <p>Created by: <a href="{{ url_for('user', username=sheet.author.username) }}">{{ sheet.author.username }}</a>
         </p>
-        {% endif %}</div>
+        <p>Last modified: {{ moment(post.timestamp).fromNow() }}:</p>
+        {% endif %}
+    </div>
 </div>
