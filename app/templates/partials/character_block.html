@@ -1,5 +1,5 @@
 <div class="character-card foldtr row">
-    <a href="{{ url_for('user', username=sheet.author.username) }}">
+    <a href="{{ url_for('main.user', username=sheet.author.username) }}">
         <div class='character-img'>
             <img src="{{ sheet.author.avatar(144) }}">
         </div>
@@ -15,9 +15,10 @@
         {% if sheet.author.username == current_user.username %}
         <p class="delete"><i class="far fa-trash-alt"></i></p>
         {% else %}
-        <p>Created by: <a href="{{ url_for('user', username=sheet.author.username) }}">{{ sheet.author.username }}</a>
+        <p>Created by: <a
+                href="{{ url_for('main.user', username=sheet.author.username) }}">{{ sheet.author.username }}</a>
         </p>
-        <p>Last modified: {{ moment(post.timestamp).fromNow() }}:</p>
+        <p>Last modified: {{ moment(sheet.timestamp).fromNow() }}:</p>
         {% endif %}
     </div>
 </div>
