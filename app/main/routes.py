@@ -87,10 +87,10 @@ def edit_profile():
                            form=form)
 
 
-@bp.route('/delete', methods=['GET, ''POST', 'DELETE'])
+@bp.route('/delete', methods=['GET', 'POST', 'DELETE'])
 @login_required
 def delete(id):
-    sheet = Sheet.query.get(id)
+    sheet = Sheet.query.get(id, **req_args)
     if sheet is None:
         flash('Charactr not found!')
         return redirect(url_for('main.sheets',))
